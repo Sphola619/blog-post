@@ -1,0 +1,151 @@
+/* Reset default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Background styling */
+body {
+  background-color: #fff; /* ✅ White background for site consistency */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+/* Header */
+header {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 100%; /* ✅ Full width */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Make the header title link white and remove underline */
+header h1 a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Auth links */
+.auth-links {
+  margin-top: 10px;
+}
+
+.auth-links a {
+  color: #00ff99;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+/* Form container */
+#root {
+  margin-top: 50px; /* Space below header */
+  background: rgba(0, 0, 0, 0.75); /* ✅ Dark form for contrast */
+  backdrop-filter: blur(8px);
+  padding: 40px 50px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  width: 350px;
+  text-align: center;
+}
+
+/* Labels */
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff; /* ✅ White labels for visibility on dark form */
+}
+
+/* Inputs */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+/* Focus effects */
+input:focus {
+  outline: none;
+  border: 2px solid #00cc66;
+  box-shadow: 0 0 8px #00cc66;
+}
+
+/* Submit button */
+input[type="submit"] {
+  background-color: #00cc66;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #00994d;
+  transform: scale(1.02);
+}
+
+/* Text link */
+p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #fff; /* white text inside form */
+}
+
+p a {
+  color: #00ff99;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile-friendly */
+@media (max-width: 400px) {
+  #root {
+    width: 90%;
+    padding: 30px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+}

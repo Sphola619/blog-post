@@ -1,0 +1,144 @@
+/* Base reset */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+body { background: #f5f7fa; color: #222; line-height: 1.5; }
+
+/* Header */
+header {
+  background-color: #111827; /* dark */
+  color: #fff;
+  padding: 22px 16px;
+  text-align: center;
+}
+header h1 { font-size: 2.2rem; letter-spacing: 0.5px; }
+header p { margin-top: 6px; color: #cbd5e1; }
+
+/* Nav */
+nav {
+  display:flex;
+  justify-content:center;
+  gap: 12px;
+  background:#0f1724;
+  padding: 8px 10px;
+  flex-wrap:wrap;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+nav a:hover { background: rgba(255,255,255,0.06); }
+
+/* Page container */
+.container { max-width: 1100px; margin: 28px auto; padding: 0 16px; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(90deg, rgba(17,24,39,0.85), rgba(17,24,39,0.65));
+  color: #fff;
+  padding: 28px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items:center;
+  background-image: url('https://via.placeholder.com/1200x300?text=Football+Hero');
+  background-size: cover;
+  background-position: center;
+}
+.hero .overlay {
+  background: rgba(0,0,0,0.45);
+  padding: 18px;
+  border-radius: 8px;
+}
+.hero h2 { font-size: 1.6rem; margin-bottom: 8px; }
+.hero p { color: #e6eef8; }
+
+/* Controls row */
+.controls {
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  margin: 18px 0;
+  gap: 12px;
+  flex-wrap:wrap;
+}
+.controls .left { font-weight:700; color:#111827; }
+.controls input[type="search"] {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  width: 220px;
+}
+
+/* Cards grid */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+.card img {
+  width:100%;
+  height:160px;
+  object-fit: cover;
+  display:block;
+}
+.card .body {
+  padding: 14px;
+  flex:1;
+}
+.card h3 { font-size: 1.05rem; margin-bottom:8px; }
+.card p { color: #475569; font-size:0.92rem; margin-bottom: 12px; }
+.card .meta {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 0 14px 14px;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* Back link / footer small */
+.back {
+  margin-top: 20px;
+  text-align: left;
+}
+.back a {
+  color: #0f1724;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ee;
+  text-decoration: none;
+  font-weight:700;
+}
+
+/* Responsive tweaks */
+@media (max-width:560px){
+  .hero { padding: 18px; }
+  header h1 { font-size:1.6rem; }
+  nav a { padding:8px 10px; font-size:0.9rem; }
+}
+
+/* Make the header title link white and remove underline */
+header h1 a {
+  color: white;
+  text-decoration: none;
+}
