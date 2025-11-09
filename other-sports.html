@@ -3,37 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Day Recap — Football</title>
+  <title>Game Day Recap — Other Sports</title>
   <link rel="stylesheet" href="football.css" />
 </head>
 <body>
 
   <header>
     <h1><a href="index.html">Game Day Recap</a></h1>
-    <p>Your go-to for football recaps, highlights and analysis</p>
+    <p>Your go-to for the latest stories and updates from across the sporting world</p>
+    <div class="auth-links">
+      <a href="#" id="write-link">Write Article</a>
+      <a href="login.html">Login</a>
+      <a href="sign-up.html">Sign Up</a>
+      <a href="#" id="logout-link">Logout</a>
+    </div>
   </header>
 
   <nav>
     <a href="index.html">Home</a>
-    <a href="football.html" aria-current="page" style="background: rgba(126, 121, 121, 0.592);">Football</a>
+    <a href="football.html">Football</a>
     <a href="cricket.html">Cricket</a>
     <a href="rugby.html">Rugby</a>
     <a href="tennis.html">Tennis</a>
-    <a href="other-sports.html">Other Sports</a>
+    <a href="other-sports.html" aria-current="page" style="background: rgba(126, 121, 121, 0.592);">Other Sports</a>
   </nav>
 
   <main class="container">
-    <section class="hero" role="banner" aria-label="Football hero">
+    <section class="hero" role="banner" aria-label="Other Sports hero">
       <div class="overlay">
-        <h2>Football — Latest Match Recaps</h2>
-        <p>From match highlights to breaking news — stay in the know with football’s biggest stories.</p>
+        <h2>Other Sports — Highlights & Insights</h2>
+        <p>From athletics to basketball, motorsport, and beyond — explore all the action you might have missed.</p>
       </div>
     </section>
 
     <div class="controls">
       <div class="left">Showing: <strong id="count">0</strong> articles</div>
       <div class="right">
-        <input id="search" type="search" placeholder="Search articles; title or excerpt" />
+        <input id="search" type="search" placeholder="Search articles by title or excerpt" />
       </div>
     </div>
 

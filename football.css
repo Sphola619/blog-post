@@ -142,3 +142,22 @@ header h1 a {
   color: white;
   text-decoration: none;
 }
+
+/* Login and Sign Up links */
+.auth-links {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.auth-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.auth-links a:hover {
+  color: #ffcc00; /* a gold-like hover color for contrast */
+}
