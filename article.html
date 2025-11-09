@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write an Article | Game Day Recap</title>
+  <link rel="stylesheet" href="article.css">
+</head>
+<body>
+
+  <header>
+    <h1><a href="index.html">Game Day Recap</a></h1>
+  </header>
+
+  <div id="article-container">
+    <h2>Write a New Article</h2>
+
+    <form id="article-form">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required placeholder="Enter article title">
+    
+      <label for="image">Upload Image:</label>
+      <input type="file" id="image" name="image" accept="image/*">
+    
+      <label for="category">Select Sport:</label>
+      <select id="category" name="category" required>
+        <option value="" disabled selected>Select a category</option>
+        <option value="football">Football</option>
+        <option value="cricket">Cricket</option>
+        <option value="rugby">Rugby</option>
+        <option value="tennis">Tennis</option>
+        <option value="other">Other</option>
+      </select>
+    
+      <label for="content">Article Content:</label>
+      <textarea id="content" name="content" rows="10" required placeholder="Write your article here..."></textarea>
+    
+      <button type="submit">Publish Article</button>
+    </form>
+  </div>
+
+  <script src="article.js"></script>
+</body>
+</html>
