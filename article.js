@@ -1,12 +1,12 @@
-// article.js — handles access control and article publishing
+// article.js — handles access control and article publishing with image upload
 
 // 🧠 Helper: Check if token is expired
 function isTokenExpired(token) {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
-    return Date.now() > payload.exp * 1000; // true if expired
+    return Date.now() > payload.exp * 1000;
   } catch {
-    return true; // invalid token
+    return true;
   }
 }
 
@@ -27,51 +27,44 @@ if (!token || isTokenExpired(token)) {
 document.getElementById('article-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Get form data
+  // Get form data fields
   const title = document.getElementById('title').value.trim();
   const category = document.getElementById('category').value;
   const content = document.getElementById('content').value.trim();
   const imageInput = document.getElementById('image');
-  let image = '';
-
-  // (Optional) Get selected image name for now
-  if (imageInput && imageInput.files && imageInput.files.length > 0) {
-    image = imageInput.files[0].name;
-  }
 
   if (!title || !category || !content) {
     alert('⚠️ Please fill in all required fields.');
     return;
   }
 
-  // Prepare data
-  const articleData = {
-    title,
-    category,
-    content,
-    image,
-  };
+  // 📦 Create a FormData object for file + text
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('category', category);
+  formData.append('content', content);
+  if (imageInput.files.length > 0) {
+    formData.append('image', imageInput.files[0]);
+  }
 
   try {
-    // Send to backend
+    // 🚀 Send form data to backend
     const response = await fetch('http://localhost:5000/api/articles/create', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` // ✅ Include JWT
+        'Authorization': `Bearer ${token}` // ✅ no Content-Type when using FormData
       },
-      body: JSON.stringify(articleData)
+      body: formData
     });
 
     const data = await response.json();
 
     if (response.ok) {
       alert('✅ Article published successfully!');
-      window.location.href = 'index.html'; // Redirect home
+      window.location.href = 'index.html'; // redirect home
     } else {
       alert(`❌ ${data.message || 'Failed to publish article.'}`);
       if (data.message && data.message.includes('expired')) {
-        // Auto logout if token expired mid-session
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         window.location.href = 'login.html';

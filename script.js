@@ -1,81 +1,55 @@
 /**
-     * Add football articles here.
-     * Each article: { title, excerpt, image, url, date }
-     * - url: can be an external link or a local file (e.g., articles/football1.html)
-     * - image: put local path or external image url
-     *
-     * To add a new card: push a new object into this array
-     */
-const articles = [
-  {
-    title: "Late Winner Seals Dramatic Comeback",
-    excerpt: "An injury-time strike turned the game on its head as the home side came from behind.",
-    image: "https://via.placeholder.com/640x360?text=Late+Winner",
-    url: "#",
-    date: "2025-09-25"
-  },
-  {
-    title: "Star Forward Returns from Injury",
-    excerpt: "A welcome return as the team regains its attacking threat ahead of the derby.",
-    image: "https://via.placeholder.com/640x360?text=Return+From+Injury",
-    url: "#",
-    date: "2025-09-23"
-  },
-  {
-    title: "Tactical Masterclass: Coach's 3-5-2 Shines",
-    excerpt: "A breakdown of how the switch in formation neutralised the opposition's wing play.",
-    image: "https://via.placeholder.com/640x360?text=3-5-2+Tactics",
-    url: "#",
-    date: "2025-09-21"
-  },
-  {
-    title: "Young Debutant Steals the Spotlight",
-    excerpt: "The academy graduate opened his account with a composed finish and confident display.",
-    image: "https://via.placeholder.com/640x360?text=Young+Debutant",
-    url: "#",
-    date: "2025-09-19"
-  }
-];
+ * script.js — Fetch and render live articles from the backend
+ * Works for both homepage (latest 7) and category pages
+ */
 
 const cardsEl = document.getElementById('cards');
 const countEl = document.getElementById('count');
 const searchInput = document.getElementById('search');
 
+// 🔹 Generic render function (same layout as before)
 function renderArticles(list) {
   cardsEl.innerHTML = '';
-  if (!list.length) {
+
+  if (!list || !list.length) {
     cardsEl.innerHTML = '<p style="padding:10px;font-size:1rem;color:#6b7280">No articles found.</p>';
-    countEl.textContent = 0;
+    if (countEl) countEl.textContent = 0;
     return;
   }
-  countEl.textContent = list.length;
-  list.forEach(a => {
+
+  if (countEl) countEl.textContent = list.length;
+
+  list.forEach(article => {
     const link = document.createElement('a');
     link.className = 'card';
-    link.href = a.url || '#';
-    link.target = a.url && a.url.startsWith('http') ? '_blank' : '_self';
+    link.href = '#'; // 🔜 later this can open a detailed view
     link.rel = 'noopener noreferrer';
 
     const img = document.createElement('img');
-    img.src = a.image || 'https://via.placeholder.com/640x360?text=No+Image';
-    img.alt = a.title;
+    img.src = article.image || 'https://via.placeholder.com/640x360?text=No+Image';
+    img.alt = article.title;
 
     const body = document.createElement('div');
     body.className = 'body';
 
     const h3 = document.createElement('h3');
-    h3.textContent = a.title;
+    h3.textContent = article.title;
 
     const p = document.createElement('p');
-    p.textContent = a.excerpt;
+    // Limit preview text for cleaner layout
+    p.textContent = article.content
+      ? article.content.substring(0, 120) + '...'
+      : 'No preview available.';
 
     const metaWrap = document.createElement('div');
     metaWrap.className = 'meta';
-    metaWrap.innerHTML = `<span>${a.date || ''}</span><span>Read →</span>`;
+    metaWrap.innerHTML = `
+      <span>${new Date(article.createdAt).toLocaleDateString()}</span>
+      <span>By ${article.author || 'Anonymous'}</span>
+    `;
 
     body.appendChild(h3);
     body.appendChild(p);
-
     link.appendChild(img);
     link.appendChild(body);
     link.appendChild(metaWrap);
@@ -84,19 +58,60 @@ function renderArticles(list) {
   });
 }
 
-// Initial render
-renderArticles(articles);
+// 📰 Fetch articles depending on page context
+async function fetchArticles() {
+  try {
+    // Detect if this is homepage or a category page
+    let apiUrl = 'http://localhost:5000/api/articles';
 
-// Basic search
-searchInput.addEventListener('input', (e) => {
-  const q = e.target.value.trim().toLowerCase();
-  if (!q) {
-    renderArticles(articles);
-    return;
+    if (window.location.href.includes('football')) {
+      apiUrl = 'http://localhost:5000/api/articles/category/Football';
+    } else if (window.location.href.includes('cricket')) {
+      apiUrl = 'http://localhost:5000/api/articles/category/Cricket';
+    } else if (window.location.href.includes('rugby')) {
+      apiUrl = 'http://localhost:5000/api/articles/category/Rugby';
+    } else if (window.location.href.includes('tennis')) {
+      apiUrl = 'http://localhost:5000/api/articles/category/Tennis';
+    } else if (window.location.href.includes('other-sports')) {
+      apiUrl = 'http://localhost:5000/api/articles/category/Other';
+    }
+
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (data.success && data.articles) {
+      renderArticles(data.articles);
+      return data.articles;
+    } else {
+      console.warn('⚠️ No articles found or invalid format:', data);
+      renderArticles([]);
+      return [];
+    }
+  } catch (error) {
+    console.error('❌ Error fetching articles:', error);
+    cardsEl.innerHTML = '<p style="color:red;">⚠️ Failed to load articles. Try again later.</p>';
   }
-  const filtered = articles.filter(a =>
-    (a.title && a.title.toLowerCase().includes(q)) ||
-    (a.excerpt && a.excerpt.toLowerCase().includes(q))
-  );
-  renderArticles(filtered);
+}
+
+// 🧠 Search function — filters current list
+let allArticles = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+  allArticles = await fetchArticles();
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      if (!q) {
+        renderArticles(allArticles);
+        return;
+      }
+      const filtered = allArticles.filter(a =>
+        (a.title && a.title.toLowerCase().includes(q)) ||
+        (a.content && a.content.toLowerCase().includes(q)) ||
+        (a.author && a.author.toLowerCase().includes(q))
+      );
+      renderArticles(filtered);
+    });
+  }
 });

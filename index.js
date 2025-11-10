@@ -1,4 +1,4 @@
-// index.js — handles homepage buttons, login checks, and logout
+// index.js — handles homepage buttons, login checks, logout, and article display
 
 // 🧠 Helper: Check if token is expired
 function isTokenExpired(token) {
@@ -41,3 +41,19 @@ if (logoutLink) {
     window.location.href = 'login.html';
   });
 }
+
+// 📰 Fetch and render latest 7 articles for homepage
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const response = await fetch('http://localhost:5000/api/articles');
+    const data = await response.json();
+
+    if (data.success && data.articles) {
+      renderArticles(data.articles); // ✅ render them using shared logic
+    } else {
+      console.warn('⚠️ No articles found or invalid response format:', data);
+    }
+  } catch (error) {
+    console.error('❌ Error fetching latest articles:', error);
+  }
+});

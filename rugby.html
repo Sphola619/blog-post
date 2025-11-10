@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Day Recap — Football</title>
+  <title>Game Day Recap — Rugby</title>
   <link rel="stylesheet" href="football.css" />
 </head>
 <body>
@@ -31,13 +31,13 @@
   <main class="container">
     <section class="hero" role="banner" aria-label="Football hero">
       <div class="overlay">
-        <h2>Football — Latest Match Recaps</h2>
+        <h2>Rugby — Latest Match Recaps</h2>
         <p>From match highlights to breaking news — stay in the know with football’s biggest stories.</p>
       </div>
     </section>
 
     <div class="controls">
-      <div class="left">Showing: <strong id="count">0</strong> articles</div>
+      <div class="left">Showing: <strong id="count">0</strong> article(s)</div>
       <div class="right">
         <input id="search" type="search" placeholder="Search articles; title or excerpt" />
       </div>
@@ -51,8 +51,10 @@
       <a href="index.html">← Back to Home</a>
     </div>
   </main>
-
-  <script src="script.js"></script>
+  
+  <script src="renderArticles.js"></script>
+  
   <script src="shared-header.js"></script>
+  <script src="rugby.js"></script>
 </body>
 </html>
