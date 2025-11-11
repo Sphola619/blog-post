@@ -32,12 +32,19 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
   const category = document.getElementById('category').value;
   const content = document.getElementById('content').value.trim();
   const imageInput = document.getElementById('image');
-
+  
+  // Validation fields
   if (!title || !category || !content) {
     alert('⚠️ Please fill in all required fields.');
     return;
   }
-
+  
+   // ⚠️ Require image upload
+   if (!imageInput.files || imageInput.files.length === 0) {
+    alert('⚠️ Please upload an image for your article.');
+    return;
+  }
+  
   // 📦 Create a FormData object for file + text
   const formData = new FormData();
   formData.append('title', title);

@@ -1,4 +1,4 @@
-// renderArticles.js — shared article rendering function with count display
+// renderArticles.js — shared article rendering function with count display and clickable details
 
 /**
  * Render articles as cards inside a given container
@@ -11,7 +11,7 @@ function renderArticles(articles, container = document.getElementById('cards')) 
     return;
   }
 
-  const countEl = document.getElementById('count'); // ✅ find the count element
+  const countEl = document.getElementById('count'); // ✅ optional counter
 
   container.innerHTML = '';
 
@@ -25,13 +25,15 @@ function renderArticles(articles, container = document.getElementById('cards')) 
   if (countEl) countEl.textContent = articles.length;
 
   articles.forEach(article => {
+    // 🔗 Card wrapper
     const card = document.createElement('a');
     card.className = 'card';
-    card.href = '#'; // Later: link to full article page
+    card.href = `article-details.html?id=${article._id}`; // ✅ dynamic link
+    card.target = '_self'; // open in same tab
 
     // 🖼️ Article image
     const img = document.createElement('img');
-    img.classList.add('card-image'); // for consistent styling
+    img.classList.add('card-image');
     img.src = article.image
       ? `http://localhost:5000${article.image}`
       : 'https://via.placeholder.com/640x360?text=No+Image';
@@ -49,6 +51,7 @@ function renderArticles(articles, container = document.getElementById('cards')) 
       ? article.content.substring(0, 120) + '...'
       : 'No content available.';
 
+    // 🕓 Meta info
     const meta = document.createElement('div');
     meta.className = 'meta';
     meta.innerHTML = `

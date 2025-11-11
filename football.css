@@ -181,3 +181,43 @@ header h1 a {
 .auth-links a:hover {
   color: #ffcc00; /* a gold-like hover color for contrast */
 }
+
+/* 📰 Article Details Page Styling */
+.article-details {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  line-height: 1.6;
+}
+
+.article-details h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.article-details .meta {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.article-details img {
+  display: block;
+  width: 100%;
+  max-width: 700px; /* 🖼️ make the image slightly smaller */
+  height: auto;
+  margin: 0 auto 20px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.article-details p {
+  color: #374151;
+  font-size: 1rem;
+  white-space: pre-line; /* ✅ keeps paragraph breaks from backend */
+}
