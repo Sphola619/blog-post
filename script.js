@@ -3,6 +3,8 @@
  * Works for both homepage (latest 7) and category pages
  */
 
+// Will use this file later for shared functions if needed 
+
 const cardsEl = document.getElementById('cards');
 const countEl = document.getElementById('count');
 const searchInput = document.getElementById('search');

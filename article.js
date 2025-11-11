@@ -57,7 +57,14 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
       body: formData
     });
 
-    const data = await response.json();
+    // 🧩 Safely parse JSON response
+    let data = {};
+    try {
+      data = await response.json();
+    } catch (err) {
+      console.warn('⚠️ Could not parse JSON response:', err);
+      data = {};
+    }
 
     if (response.ok) {
       alert('✅ Article published successfully!');
@@ -71,7 +78,7 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
       }
     }
   } catch (error) {
-    console.error('❌ Error:', error);
+    console.error('❌ Network or fetch error:', error);
     alert('⚠️ Something went wrong. Please try again.');
   }
 });
