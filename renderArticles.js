@@ -12,7 +12,6 @@ function renderArticles(articles, container = document.getElementById('cards')) 
   }
 
   const countEl = document.getElementById('count'); // ✅ optional counter
-
   container.innerHTML = '';
 
   if (!articles || articles.length === 0) {
@@ -37,7 +36,7 @@ function renderArticles(articles, container = document.getElementById('cards')) 
     img.src = article.image
       ? `http://localhost:5000${article.image}`
       : 'https://via.placeholder.com/640x360?text=No+Image';
-    img.alt = article.title;
+    img.alt = article.title || 'Article image';
 
     // 📰 Article content
     const contentDiv = document.createElement('div');
@@ -54,8 +53,29 @@ function renderArticles(articles, container = document.getElementById('cards')) 
     // 🕓 Meta info
     const meta = document.createElement('div');
     meta.className = 'meta';
+
+    // 🧠 Handle both 'date' and 'createdAt' safely
+    const dateValue = article.date || article.createdAt;
+    let formattedDate = 'Unknown date';
+    let formattedTime = '';
+
+    if (dateValue) {
+      const dateObj = new Date(dateValue);
+      if (!isNaN(dateObj)) {
+        formattedDate = dateObj.toLocaleDateString([], {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+        formattedTime = dateObj.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+    }
+
     meta.innerHTML = `
-      <span>${new Date(article.date).toLocaleDateString()}</span>
+      <span>${formattedDate}${formattedTime ? ` at ${formattedTime}` : ''}</span>
       <span>By ${article.author || 'Guest'}</span>
     `;
 

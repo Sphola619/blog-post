@@ -33,17 +33,35 @@
       <img id="article-image" src="" alt="Article image" />
       <h2 id="article-title"></h2>
       <p class="meta">
-        <span id="article-author"></span> • <span id="article-date"></span>
-      </p>
+        <span id="article-author"></span> • 
+        <span id="article-date"></span>  
+        <span id="article-time"></span>
+      </p>      
       <p id="article-content"></p>
     </article>
+
+    <!--Comments Section-->
+  <section class="comments-section">
+    <h3>Comments</h3>
+    
+    <div id="comments-container"></div>
+  
+    <form id="comment-form">
+      <textarea id="comment-text" placeholder="Write your comment..." required></textarea>
+      <button type="submit">Post Comment</button>
+    </form>
+  </section>
 
     <div class="back">
       <a href="index.html">← Back to Home</a>
     </div>
   </main>
+  
 
   <script src="shared-header.js"></script>
   <script src="article-details.js"></script>
+  <script src="comments.js"></script>
+  <script src="renderArticles.js"></script>
+
 </body>
 </html>
