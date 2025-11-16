@@ -1,0 +1,184 @@
+/* mobile-styles.css */
+/* -----------------------------------------------
+   Game Day Recap – Mobile & Hamburger Navigation
+   ----------------------------------------------- */
+
+/* ✅ Applies only to small screens */
+@media (max-width: 768px) {
+
+  /* General reset adjustments */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* HEADER ----------------------------- */
+  header {
+    position: relative;
+    padding: 16px 20px;
+    text-align: left;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+    color: #d1d5db;
+  }
+
+  /* Auth Links hidden in header for mobile */
+  .auth-links {
+    display: none;
+  }
+
+  /* NAVIGATION ----------------------------- */
+  nav {
+    display: none; /* Hidden by default on mobile */
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #111827;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    z-index: 99;
+  }
+
+  nav a {
+    width: 100%;
+    padding: 14px 22px;
+    font-size: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  nav a:hover {
+    background-color: rgba(255,255,255,0.08);
+  }
+
+  /* HAMBURGER BUTTON ----------------------------- */
+  .hamburger {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    width: 32px;
+    height: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 100;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  /* Active (open) hamburger animation */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+  }
+
+  /* Show menu when active */
+  nav.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* HERO SECTION ----------------------------- */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    background-position: center;
+  }
+
+  .hero h2 {
+    font-size: 1.3rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  /* CARDS SECTION ----------------------------- */
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    border-radius: 8px;
+  }
+
+  .card img {
+    height: 160px;
+  }
+
+  .card-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .card-content p {
+    font-size: 0.95rem;
+  }
+
+  /* ARTICLE DETAILS PAGE ----------------------------- */
+  .article-details {
+    padding: 10px;
+  }
+
+  #article-image {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  #article-title {
+    font-size: 1.5rem;
+    margin-top: 15px;
+  }
+
+  #article-content {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .meta {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  /* BACK BUTTON ----------------------------- */
+  .back a {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+}
