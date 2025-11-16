@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch('http://localhost:5000/api/articles/category/other');
+    const response = await fetch('https://blog-post-backend-ko1i.onrender.com/api/articles/category/other');
     const data = await response.json(); // ✅ parse response
 
     if (data.success && data.articles) {

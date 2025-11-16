@@ -64,18 +64,18 @@ function renderArticles(list) {
 async function fetchArticles() {
   try {
     // Detect if this is homepage or a category page
-    let apiUrl = 'http://localhost:5000/api/articles';
+    let apiUrl = 'https://blog-post-backend-ko1i.onrender.com/api/articles';
 
     if (window.location.href.includes('football')) {
-      apiUrl = 'http://localhost:5000/api/articles/category/Football';
+      apiUrl = 'https://blog-post-backend-ko1i.onrender.com/api/articles/category/Football';
     } else if (window.location.href.includes('cricket')) {
-      apiUrl = 'http://localhost:5000/api/articles/category/Cricket';
+      apiUrl = 'https://blog-post-backend-ko1i.onrender.com/api/articles/category/Cricket';
     } else if (window.location.href.includes('rugby')) {
-      apiUrl = 'http://localhost:5000/api/articles/category/Rugby';
+      apiUrl = 'https://blog-post-backend-ko1i.onrender.com/api/articles/category/Rugby';
     } else if (window.location.href.includes('tennis')) {
-      apiUrl = 'http://localhost:5000/api/articles/category/Tennis';
+      apiUrl = 'https://blog-post-backend-ko1i.onrender.com/api/articles/category/Tennis';
     } else if (window.location.href.includes('other-sports')) {
-      apiUrl = 'http://localhost:5000/api/articles/category/Other';
+      apiUrl = 'https://blog-post-backend-ko1i.onrender.com/api/articles/category/Other';
     }
 
     const response = await fetch(apiUrl);

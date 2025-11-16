@@ -11,7 +11,7 @@ function renderArticles(articles, container = document.getElementById('cards')) 
     return;
   }
 
-  const countEl = document.getElementById('count'); // ✅ optional counter
+  const countEl = document.getElementById('count');
   container.innerHTML = '';
 
   if (!articles || articles.length === 0) {
@@ -20,22 +20,30 @@ function renderArticles(articles, container = document.getElementById('cards')) 
     return;
   }
 
-  // ✅ Update count dynamically
   if (countEl) countEl.textContent = articles.length;
 
   articles.forEach(article => {
     // 🔗 Card wrapper
     const card = document.createElement('a');
     card.className = 'card';
-    card.href = `article-details.html?id=${article._id}`; // ✅ dynamic link
-    card.target = '_self'; // open in same tab
+    card.href = `article-details.html?id=${article._id}`;
+    card.target = '_self';
 
-    // 🖼️ Article image
+    // 🖼️ Article image — safer logic
     const img = document.createElement('img');
     img.classList.add('card-image');
-    img.src = article.image
-      ? `http://localhost:5000${article.image}`
+
+    let imagePath = article.image || '';
+
+    // ensure image starts with "/"
+    if (imagePath && !imagePath.startsWith('/')) {
+      imagePath = '/' + imagePath;
+    }
+
+    img.src = imagePath
+      ? `https://blog-post-backend-ko1i.onrender.com${imagePath}`
       : 'https://via.placeholder.com/640x360?text=No+Image';
+
     img.alt = article.title || 'Article image';
 
     // 📰 Article content
@@ -50,11 +58,10 @@ function renderArticles(articles, container = document.getElementById('cards')) 
       ? article.content.substring(0, 120) + '...'
       : 'No content available.';
 
-    // 🕓 Meta info
+    // 🕓 Meta info (date + time)
     const meta = document.createElement('div');
     meta.className = 'meta';
 
-    // 🧠 Handle both 'date' and 'createdAt' safely
     const dateValue = article.date || article.createdAt;
     let formattedDate = 'Unknown date';
     let formattedTime = '';

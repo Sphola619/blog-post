@@ -39,51 +39,54 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
     return;
   }
   
-   // ⚠️ Require image upload
-   if (!imageInput.files || imageInput.files.length === 0) {
+  // ⚠️ Require image upload
+  if (!imageInput.files || imageInput.files.length === 0) {
     alert('⚠️ Please upload an image for your article.');
     return;
   }
-  
-  // 📦 Create a FormData object for file + text
+
+  // 📦 Create FormData for file + text
   const formData = new FormData();
   formData.append('title', title);
   formData.append('category', category);
   formData.append('content', content);
-  if (imageInput.files.length > 0) {
-    formData.append('image', imageInput.files[0]);
-  }
+  formData.append('image', imageInput.files[0]);
 
   try {
-    // 🚀 Send form data to backend
-    const response = await fetch('http://localhost:5000/api/articles/create', {
+    // 🚀 Send to backend (using Render URL)
+    const response = await fetch('https://blog-post-backend-ko1i.onrender.com/api/articles/create', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token}` // ✅ no Content-Type when using FormData
+        'Authorization': `Bearer ${token}` // no Content-Type when using FormData
       },
       body: formData
     });
 
-    // 🧩 Safely parse JSON response
+    // 🧩 Safely parse JSON
     let data = {};
     try {
       data = await response.json();
     } catch (err) {
       console.warn('⚠️ Could not parse JSON response:', err);
-      data = {};
     }
 
+    // ✔ Success
     if (response.ok) {
       alert('✅ Article published successfully!');
-      window.location.href = 'index.html'; // redirect home
-    } else {
-      alert(`❌ ${data.message || 'Failed to publish article.'}`);
-      if (data.message && data.message.includes('expired')) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        window.location.href = 'login.html';
-      }
+      window.location.href = 'index.html';
+      return;
     }
+
+    // ❌ Backend error
+    alert(`❌ ${data.message || 'Failed to publish article.'}`);
+
+    // 🔑 Handle expired token
+    if (data.message && data.message.includes('expired')) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      window.location.href = 'login.html';
+    }
+
   } catch (error) {
     console.error('❌ Network or fetch error:', error);
     alert('⚠️ Something went wrong. Please try again.');

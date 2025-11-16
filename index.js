@@ -45,7 +45,7 @@ if (logoutLink) {
 // 📰 Fetch and render latest 7 articles for homepage
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch('http://localhost:5000/api/articles');
+    const response = await fetch('https://blog-post-backend-ko1i.onrender.com/api/articles');
     const data = await response.json();
 
     if (data.success && data.articles) {
