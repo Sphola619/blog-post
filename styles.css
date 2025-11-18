@@ -213,3 +213,8 @@ header h1 a {
   object-fit: cover; /* ensures consistent crop without distortion */
   border-bottom: 1px solid #eee;
 }
+
+/* Hide mobile-only links on desktop */
+.mobile-only {
+  display: none;
+}

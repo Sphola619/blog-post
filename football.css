@@ -278,3 +278,8 @@ header h1 a {
 .meta span {
   margin-right: 4px;
 }
+
+/* Hide mobile-only links on desktop */
+.mobile-only {
+  display: none;
+}
