@@ -40,9 +40,8 @@ function renderArticles(articles, container = document.getElementById('cards')) 
       imagePath = '/' + imagePath;
     }
 
-    img.src = imagePath
-      ? `https://blog-post-backend-ko1i.onrender.com${imagePath}`
-      : 'https://via.placeholder.com/640x360?text=No+Image';
+    img.src = article.image || 'https://via.placeholder.com/640x360?text=No+Image';
+
 
     img.alt = article.title || 'Article image';
 

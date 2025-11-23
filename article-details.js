@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (res.ok && data.success) {
       const article = data.article;
 
-      // 🖼️ Image
+      // 🖼️ Image (Cloudinary or stored URL)
       const imageEl = document.getElementById('article-image');
-      imageEl.src = article.image
-        ? `https://blog-post-backend-ko1i.onrender.com${article.image}`
+      imageEl.src = article.image 
+        ? article.image 
         : 'https://via.placeholder.com/640x360?text=No+Image';
       imageEl.alt = article.title || 'Article image';
 
