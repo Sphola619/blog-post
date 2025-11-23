@@ -1,10 +1,10 @@
-# Game Day Recap — Sports Blog (Work-in-Progress)
+# Game Day Recap — Sports Blog 
 
 **Game Day Recap** is a responsive sports blog designed to keep users up to date with the latest news, match recaps, and highlights from multiple sports. This project is intended as a portfolio piece to showcase frontend development skills, including HTML, CSS, and basic JavaScript functionality.
 
 ---
 
-## 🏟 Features Completed So Far
+## 🏟 Features
 
 - **Landing Page (`index.html`)**
   - Header with the blog title
