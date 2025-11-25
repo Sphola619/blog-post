@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch('https://blog-post-backend-ko1i.onrender.com/api/articles/category/other');
-    const data = await response.json(); // ✅ parse response
+    const response = await fetch(
+      `https://blog-post-backend-ko1i.onrender.com/api/articles/category/other?ts=${Date.now()}`,
+      { cache: "no-store" }
+    );
+
+    const data = await response.json();
 
     if (data.success && data.articles) {
-      renderArticles(data.articles); // ✅ only pass the article list
+      renderArticles(data.articles);
     } else {
       console.warn('⚠️ No articles found or invalid response format:', data);
     }
   } catch (error) {
-    console.error('❌ Error fetching Cricket articles:', error);
+    console.error('❌ Error fetching Other Sports articles:', error);
   }
 });

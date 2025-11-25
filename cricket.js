@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch('https://blog-post-backend-ko1i.onrender.com/api/articles/category/cricket');
-    const data = await response.json(); // ✅ parse response
+    // 🔥 Cache-buster added to force fresh data every time
+    const response = await fetch(
+      `https://blog-post-backend-ko1i.onrender.com/api/articles/category/cricket?ts=${Date.now()}`,
+      { cache: "no-store" } // 🔥 Prevent browser & Vercel caching
+    );
+
+    const data = await response.json();
 
     if (data.success && data.articles) {
-      renderArticles(data.articles); // ✅ only pass the article list
+      renderArticles(data.articles); // Only pass article list
     } else {
       console.warn('⚠️ No articles found or invalid response format:', data);
     }
@@ -12,4 +17,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('❌ Error fetching Cricket articles:', error);
   }
 });
-
